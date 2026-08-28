@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Ridge — New Card{% endblock %}
+
+{% block content %}
+<main class="max-w-lg mx-auto px-4 pt-6">
+  <a href="/cards" class="text-sm text-fg-muted hover:text-fg no-underline inline-flex items-center gap-1 mb-4">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    Back to cards
+  </a>
+
+  <h1 class="text-2xl font-bold tracking-tight text-fg mb-1">New Flashcard</h1>
+  <p class="text-fg-muted text-sm mb-6">Add an English–Spanish pair to your deck.</p>
+
+  {% if errors.len() > 0 %}
+  <div class="card border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950 mb-4">
+    <ul class="list-disc list-inside text-sm text-red-700 dark:text-red-400">
+      {% for err in errors %}
+      <li>{{ err }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <form method="post" action="/cards" class="space-y-4">
+    <div>
+      <label for="front" class="label">English</label>
+      <input type="text" id="front" name="front" required
+             placeholder="e.g. Hello" maxlength="500"
+             value="{{ front }}"
+             class="input-field">
+    </div>
+    <div>
+      <label for="back" class="label">Spanish</label>
+      <input type="text" id="back" name="back" required
+             placeholder="e.g. Hola" maxlength="500"
+             value="{{ back }}"
+             class="input-field">
+    </div>
+    <div class="flex gap-3 pt-2">
+      <button type="submit" class="btn-primary">Create Card</button>
+      <a href="/cards" class="btn-ghost no-underline">Cancel</a>
+    </div>
+  </form>
+</main>
+{% endblock %}

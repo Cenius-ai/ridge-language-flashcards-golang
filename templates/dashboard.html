@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}Ridge — Dashboard{% endblock %}
+
+{% block content %}
+<main class="max-w-2xl mx-auto px-4 pt-8">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold tracking-tight text-fg">Ridge</h1>
+    <p class="text-fg-muted mt-1 text-lg">English → Spanish flashcards</p>
+  </header>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <a href="/study" class="card block no-underline hover:border-accent transition-colors group">
+      <div class="flex items-start justify-between">
+        <div>
+          <p class="text-fg-muted text-sm font-medium uppercase tracking-wide">Due for review</p>
+          <p class="text-4xl font-bold text-fg mt-1 tabular-nums">{{ due_count }}</p>
+        </div>
+        <span class="pill pill-due group-hover:bg-accent-hover transition-colors">
+          {% if due_count > 0 %}Study now →{% else %}All clear{% endif %}
+        </span>
+      </div>
+    </a>
+
+    <a href="/cards" class="card block no-underline hover:border-accent transition-colors group">
+      <div>
+        <p class="text-fg-muted text-sm font-medium uppercase tracking-wide">Total cards</p>
+        <p class="text-4xl font-bold text-fg mt-1 tabular-nums">{{ total }}</p>
+        <span class="inline-block mt-2 text-accent text-sm font-medium group-hover:underline">Browse cards →</span>
+      </div>
+    </a>
+  </div>
+
+  {% if due_count > 0 %}
+  <div class="mt-8">
+    <a href="/study" class="btn-primary w-full sm:w-auto text-lg py-3 px-8">
+      Start Studying
+    </a>
+  </div>
+  {% else %}
+  <div class="mt-8 card">
+    <p class="text-fg-muted text-center text-lg">🎉 All caught up! Come back when cards are due for review.</p>
+    <div class="mt-4 text-center">
+      <a href="/cards/new" class="btn-primary">Add New Card</a>
+    </div>
+  </div>
+  {% endif %}
+</main>
+{% endblock %}

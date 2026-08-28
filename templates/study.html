@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}Ridge — Study{% endblock %}
+
+{% block content %}
+<main class="max-w-lg mx-auto px-4 pt-6">
+  <header class="mb-6 flex items-center justify-between">
+    <h1 class="text-2xl font-bold tracking-tight text-fg">Study</h1>
+    <span class="pill pill-due">{{ due_count }} due</span>
+  </header>
+
+  <div class="card" id="study-card">
+    <!-- Front -->
+    <div id="card-front" class="text-center py-10">
+      <p class="text-fg-muted text-sm font-medium uppercase tracking-wide mb-3">English</p>
+      <p class="text-3xl font-bold text-fg">{{ card.front }}</p>
+      <button
+        onclick="document.getElementById('card-front').classList.add('hidden'); document.getElementById('card-back').classList.remove('hidden');"
+        class="btn-primary mt-6"
+        type="button"
+      >
+        Flip to reveal
+      </button>
+    </div>
+
+    <!-- Back -->
+    <div id="card-back" class="hidden text-center py-10">
+      <p class="text-fg-muted text-sm font-medium uppercase tracking-wide mb-3">Spanish</p>
+      <p class="text-3xl font-bold text-accent">{{ card.back }}</p>
+      <p class="text-fg-muted text-xs mt-4">How well did you know this?</p>
+      <form method="post" action="/study/answer" class="mt-4 grid grid-cols-2 gap-2">
+        <input type="hidden" name="card_id" value="{{ card.id }}">
+        <button type="submit" name="rating" value="again" class="btn-ghost border-red-300 text-red-700 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950">
+          Again
+        </button>
+        <button type="submit" name="rating" value="hard" class="btn-ghost border-orange-300 text-orange-700 hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950">
+          Hard
+        </button>
+        <button type="submit" name="rating" value="good" class="btn-ghost border-emerald-300 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-950">
+          Good
+        </button>
+        <button type="submit" name="rating" value="easy" class="btn-primary">
+          Easy
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <p class="text-center text-fg-muted text-sm mt-4">
+    Card #{{ card.id }} &middot; interval {{ card.interval }}d &middot; EF {{ card.ease_factor }}
+  </p>
+</main>
+{% endblock %}

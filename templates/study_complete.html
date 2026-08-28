@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Ridge — Study Complete{% endblock %}
+
+{% block content %}
+<main class="max-w-lg mx-auto px-4 pt-6">
+  <header class="mb-6">
+    <h1 class="text-2xl font-bold tracking-tight text-fg">Study</h1>
+  </header>
+
+  <div class="card text-center py-12">
+    <p class="text-5xl mb-4">🎉</p>
+    <h2 class="text-2xl font-bold text-fg mb-2">All caught up!</h2>
+    <p class="text-fg-muted mb-6">All {{ total }} cards have been reviewed. Come back when cards are due.</p>
+    <a href="/cards/new" class="btn-primary">Add New Card</a>
+  </div>
+</main>
+{% endblock %}
