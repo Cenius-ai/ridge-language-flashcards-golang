@@ -1,0 +1,7 @@
+/target
+ridge.db
+node_modules
+.env
+*.swp
+.DS_Store
+tailwindcss-linux-x64
